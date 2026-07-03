@@ -23,9 +23,9 @@ spec:
 
       - name: product-service
 
-        image: uascc-product-service
+        image: festiana3110/uascc-product-service:latest
 
-        imagePullPolicy: Never
+        imagePullPolicy: Always
 
         ports:
 

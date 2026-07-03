@@ -23,9 +23,9 @@ spec:
 
       - name: order-service
 
-        image: uascc-order-service
+        image: festiana3110/uascc-order-service:latest
 
-        imagePullPolicy: Never
+        imagePullPolicy: Always
 
         ports:
 

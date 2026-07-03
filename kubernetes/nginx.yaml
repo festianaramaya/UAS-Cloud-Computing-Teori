@@ -23,9 +23,9 @@ spec:
 
       - name: nginx
 
-        image: uascc-nginx
+        image: festiana3110/uascc-nginx:latest
 
-        imagePullPolicy: Never
+        imagePullPolicy: Always
 
         ports:
 
