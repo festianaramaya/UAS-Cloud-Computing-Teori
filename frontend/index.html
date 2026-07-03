@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Cloud Shop UAS</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Cloud Shop UAS</h1>
+
+<div class="card">
+
+<h2>Login</h2>
+
+<input
+id="username"
+placeholder="Username">
+
+<input
+id="password"
+type="password"
+placeholder="Password">
+
+<button onclick="login()">
+
+Login
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Daftar Produk</h2>
+
+<button onclick="getProducts()">
+
+Load Products
+
+</button>
+
+<ul id="products"></ul>
+
+</div>
+
+<div class="card">
+
+<h2>Buat Order</h2>
+
+<input
+id="product"
+placeholder="Nama Produk">
+
+<input
+id="quantity"
+type="number"
+placeholder="Jumlah">
+
+<button onclick="createOrder()">
+
+Order
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>Riwayat Order</h2>
+
+<button onclick="getOrders()">
+
+Load Orders
+
+</button>
+
+<ul id="orders"></ul>
+
+</div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>

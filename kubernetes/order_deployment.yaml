@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: order-service
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: order-service
+
+  template:
+
+    metadata:
+      labels:
+        app: order-service
+
+    spec:
+
+      containers:
+
+      - name: order-service
+
+        image: uascc-order-service
+
+        imagePullPolicy: Never
+
+        ports:
+
+        - containerPort: 3002
+
+        env:
+
+        - name: DB_HOST
+          value: postgres
+
+        - name: DB_USER
+          value: admin
+
+        - name: DB_PASSWORD
+          value: admin123
+
+        - name: DB_NAME
+          value: uas_cloud
+
+        - name: DB_PORT
+          value: "5432"
+
+        - name: JWT_SECRET
+          value: secret123
+
+---
+
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: order-service
+
+spec:
+
+  selector:
+    app: order-service
+
+  ports:
+
+  - port: 3002
+    targetPort: 3002

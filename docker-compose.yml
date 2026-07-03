@@ -1,0 +1,95 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: uas-postgres
+    restart: always
+
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: uas_cloud
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  redis:
+    image: redis:7
+    container_name: uas-redis
+    restart: always
+
+    ports:
+      - "6379:6379"
+
+  login-service:
+    build:
+      context: ./services/login-service
+
+    container_name: uas-login-service
+    restart: always
+
+    ports:
+      - "3000:3000"
+
+    depends_on:
+      - postgres
+
+    env_file:
+      - ./services/login-service/.env
+
+  product-service:
+    build:
+      context: ./services/product-service
+
+    container_name: uas-product-service
+    restart: always
+
+    ports:
+      - "3001:3001"
+
+    depends_on:
+      - postgres
+
+    env_file:
+      - ./services/product-service/.env
+
+  order-service:
+    build:
+      context: ./services/order-service
+
+    container_name: uas-order-service
+    restart: always
+
+    ports:
+      - "3002:3002"
+
+    depends_on:
+      - postgres
+
+    env_file:
+      - ./services/order-service/.env
+
+  nginx:
+    build:
+      context: ./nginx
+
+    container_name: uas-nginx
+
+    restart: always
+
+    ports:
+      - "80:80"
+
+    depends_on:
+      - login-service
+      - product-service
+      - order-service
+      
+volumes:
+  postgres_data:
